@@ -79,5 +79,6 @@ def posibilities(cast):
     for key, value in posibility.items():
         if value != 0:
             print(f"{key} : Your Value: {value}")
+    return posibility
 
 

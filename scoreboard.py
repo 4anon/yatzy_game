@@ -1,4 +1,5 @@
 import random
+from scoring import *
 
 def displayscoreboard(scoredcategories):
     lines = ['\nSCOREBOARD']

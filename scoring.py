@@ -71,9 +71,10 @@ def fourkind(dice):
     return 0
 def smallstraight(dice):
     sorteddice=sorted(set(dice))
-   if sorteddice==[1,2,3,4,5]:
-       return 15
-   return 0
+    if sorteddice==[1,2,3,4,5]:
+        return 15
+    return 0
+
 def largestraight(dice):
     sorteddice=sorted(set(dice))
     if sorteddice==[2,3,4,5,6]:
@@ -93,8 +94,8 @@ def bonuscheck(scorecategories):
     uppersection=['ones','twos','threes','fours','fives','sixes']
     upperscore=0
     for category in uppersection:
-        if category in scored categories:
+        if category in scoredcategories:
             upperscore+=scoredcategories[category]
-    if upperscore>=63:
-        return 50
+        if upperscore>=63:
+            return 50
     return 0
