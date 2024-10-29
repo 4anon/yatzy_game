@@ -10,16 +10,24 @@ def categorychoice(filledcategories,cast):
         return 'invalid category try again'
     filledcategories[category]=score
     return f'You scored {score} points in the {category}',filledcategories
-
 def menu():
- scoredcategories={}
  filledcategories={}
- totalscore=0
+ totalscore={}
+ nplayers=int(input('enter the number of players:'))
+ playerscore={}
+ playerboard={}
+ for player in range(nplayers):
+     playerscore[player]=0
+     playerboard[player]={}
+ for player in range(nplayers):
+     totalscore[player]=0
  
  while len(filledcategories)<15:
-    cast0 = diceroll([])
-    throws = 0
-    while throws < 2:
+   for player in range(nplayers):
+     print(f'\n {player}s TURN')
+     cast0 = diceroll([])
+     throws = 0
+     while throws < 2:
         
         print(f"Current roll: {cast0}")
         
@@ -42,18 +50,21 @@ def menu():
         throws += 1
         print(f"Your cast: {cast0}")
         posibilities(cast0)
-    print(displayscoreboard(filledcategories))
-    filledcategories=categorychoice(filledcategories,cast0)
-    if filledcategories:
+     print(displayscoreboard(filledcategories))
+     filledcategories=categorychoice(filledcategories,cast0)
+     if filledcategories:
         for placement in filledcategories:
             category=placement
         score=filledcategories[category]
-        totalscore+=score
+        totalscore[player]+=score
         print(f'category:{category} ,score:{score}')
-    print(displayscoreboard(filledcategories))
-    print(f'Your current total score is:{totalscore}')
- print(f'Your final total score is:{totalscore}')
-            
+     print(displayscoreboard(filledcategories))
+     print(f'Your current total score is:{totalscore}')
+  print('\n FINAL SCORES:')
+  for player in range(nplayers):
+      print(f'player{player}:{totalscore[player]}')
     
+
+menu()
 
 menu()
