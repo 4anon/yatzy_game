@@ -2,9 +2,16 @@ import random
 from scoring import *
 
 def displayscoreboard(scoredcategories):
-    lines = ['\nSCOREBOARD']
-    for category,score in scoredcategories.items():
-        lines.append(f'{category}:{score}')
+    categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
+        "one pair", "two pairs", "three of a kind", "four of a kind",
+        "small straight", "large straight", "full house", "chance", "yatzy"]
+    lines=['\nSCOREBOARD']
+    for category in categories
+       if category in scoredcategories:
+          score=scoredcategories[category]
+          lines.append(f'{category}:{score}')
+       else:
+          lines.append(f'{category}:     ')
     lines.append('')
     output='\n'.join(lines)
     return output
