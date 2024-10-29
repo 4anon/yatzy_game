@@ -105,3 +105,10 @@ def highscore(totalscore):
     if totalscore>highscore:
         highscore=totalscore
     return highscore
+def highscoreinstall():
+    with open('highscore.txt','r') as file:
+        score=file.read().strip()
+        return int(score)
+def uploadhighscore(highscore):
+    with open('highscore.txt','w') as file:
+        file.write(str(highscore))
