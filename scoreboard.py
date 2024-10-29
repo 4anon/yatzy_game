@@ -43,13 +43,16 @@ def scorecalculation(choice,cast):
     else:
         return 'invalid category'
     
-def categorychoice(pssibility,filledcategories,cast):
-    category=input('entera category').strip().lower()
-    if category in filledcategory:
+def categorychoice(filledcategories,cast):
+    categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
+        "onepair", "twopairs", "threeofakind", "fourofakind",
+        "smallstraight", "largestraight", "fullhouse", "chance", "yatzy"]
+    
+    category=input('enter a category').strip().lower()
+    if category in filledcategories:
         return 'this category is filled choose a different one'
-    if category not in possibility:
+    if category not in categories:
         return 'invalid category try again'
-    score=scorecalculation(cast,category)
     filledcategories[category]=score
     return f'You scored {score} points in the {category}',filledcategories
 
