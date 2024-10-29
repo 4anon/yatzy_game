@@ -99,3 +99,9 @@ def bonuscheck(scorecategories):
         if upperscore>=63:
             return 50
     return 0
+highscore=0
+def highscore(totalscore):
+    global highscore
+    if totalscore>highscore:
+        highscore=totalscore
+    return highscore
