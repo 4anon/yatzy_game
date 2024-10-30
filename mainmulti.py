@@ -14,8 +14,14 @@ def categorychoice(filledcategories,cast):
         return 'this category is filled choose a different one'
     if category not in categories:
         return 'invalid category try again'
-    score = filledcategories[category]
-    return f'You scored {score} points in the {category}',filledcategories
+    try:
+        score=scorecalculation(category,cast)
+    
+        filledcategories[category]=int(score)
+        return f'You scored {score} points in the {category}',filledcategories
+    except (ValuError,TypeError):
+        return'Type error or Value error try again'
+    
     
 def menu():
  filledcategories={}
