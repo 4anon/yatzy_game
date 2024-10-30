@@ -1,15 +1,22 @@
+from dice import *
+from posibility_count import *
+from scoreboard import *
+from scoring import *
+
+
 def categorychoice(filledcategories,cast):
     categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
         "one pair", "two pairs", "three of a kind", "four of a kind",
         "small straight", "large straight", "full house", "chance", "yatzy"]
     
-    category=input('enter a category').strip().lower()
+    category=input('enter a category: ').strip().lower()
     if category in filledcategories:
         return 'this category is filled choose a different one'
     if category not in categories:
         return 'invalid category try again'
-    filledcategories[category]=score
+    score = filledcategories[category]
     return f'You scored {score} points in the {category}',filledcategories
+    
 def menu():
  filledcategories={}
  totalscore={}
@@ -23,7 +30,7 @@ def menu():
      totalscore[player]=0
  
  while len(filledcategories)<15:
-   for player in range(nplayers):
+    for player in range(nplayers):
      print(f'\n {player}s TURN')
      cast0 = diceroll([])
      throws = 0
@@ -58,11 +65,11 @@ def menu():
         score=filledcategories[category]
         totalscore[player]+=score
         print(f'category:{category} ,score:{score}')
-     print(displayscoreboard(filledcategories))
-     print(f'Your current total score is:{totalscore}')
-  print('\n FINAL SCORES:')
-  for player in range(nplayers):
-      print(f'player{player}:{totalscore[player]}')
+    print(displayscoreboard(filledcategories))
+    print(f'Your current total score is:{totalscore}')
+    print('\n FINAL SCORES:')
+    for player in range(nplayers):
+        print(f'player{player}:{totalscore[player]}')
     
 
 menu()

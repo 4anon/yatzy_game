@@ -6,7 +6,7 @@ def displayscoreboard(scoredcategories):
         "one pair", "two pairs", "three of a kind", "four of a kind",
         "small straight", "large straight", "full house", "chance", "yatzy"]
     lines=['\nSCOREBOARD']
-    for category in categories
+    for category in categories:
        if category in scoredcategories:
           score=scoredcategories[category]
           lines.append(f'{category}:{score}')
