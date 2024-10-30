@@ -64,18 +64,27 @@ def menu():
         print(f"Your cast: {cast0}")
         posibilities(cast0)
      print(displayscoreboard(filledcategories))
-     filledcategories=categorychoice(filledcategories,cast0)
-     if filledcategories:
-        for placement in filledcategories:
-            category=placement
-        score=filledcategories[category]
-        totalscore[player]+=score
-        print(f'category:{category} ,score:{score}')
+     while True:
+         result=categorychoice(filledcategories,cast0)
+         if result[0]:
+             print(result[0])
+         else:
+             filledcategories=result[1]
+             
+         if filledcategories:
+            for placement in filledcategories:
+                category=placement
+            score=filledcategories[category]
+            totalscore[player]+=score
+            print(f'category:{category} ,score:{score}')
+            break
+         else:
+            print('Either all categories are filled or invalid category.')
     print(displayscoreboard(filledcategories))
-    print(f'Your current total score is:{totalscore}')
-    print('\n FINAL SCORES:')
-    for player in range(nplayers):
-        print(f'player{player}:{totalscore[player]}')
+    print(f'Your current total score is:{totalscore}')    
+print('\n FINAL SCORES:')
+for player in range(nplayers):
+    print(f'player{player}:{totalscore[player]}')
     
 
 menu()
