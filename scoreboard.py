@@ -16,40 +16,42 @@ def displayscoreboard(scoredcategories):
     output='\n'.join(lines)
     return output
 
-def scorecalculation(choice,cast):
-    if choice=='ones':
-        return scorenumber(cast,1)
-    elif choice=='twos':
-        return scorenumber(cast,2)
-    elif choice=='threes':
-        return scorenumber(cast,3)
-    elif choice=='fours':
-        return scorenumber(cast,4)
-    elif choice=='fives':
-        return scorenumber(cast,5)
-    elif choice=='sixes':
-        return scorenumber(cast,6)
-    elif choice=='onepair':
+def scorecalculation(choice, cast):
+    choice = choice.replace(" ", "")  # Remove spaces for consistent matching
+
+    if choice == 'ones':
+        return scorenumber(cast, 1)
+    elif choice == 'twos':
+        return scorenumber(cast, 2)
+    elif choice == 'threes':
+        return scorenumber(cast, 3)
+    elif choice == 'fours':
+        return scorenumber(cast, 4)
+    elif choice == 'fives':
+        return scorenumber(cast, 5)
+    elif choice == 'sixes':
+        return scorenumber(cast, 6)
+    elif choice == 'onepair':
         return onepair(cast)
-    elif choice=='twoppair':
+    elif choice == 'twopair':
         return twopair(cast)
-    elif choice=='threeofakind':
+    elif choice == 'threeofakind':
         return threekind(cast)
-    elif choice=='fourofakind':
+    elif choice == 'fourofakind':
         return fourkind(cast)
-    elif choice=='smallstraight':
+    elif choice == 'smallstraight':
         return smallstraight(cast)
-    elif choice=='largestraight':
+    elif choice == 'largestraight':
         return largestraight(cast)
-    elif choice=='fullhouse':
+    elif choice == 'fullhouse':
         return fullhouse(cast)
-    elif choice=='chance':
+    elif choice == 'chance':
         return sum(cast)
-    elif choice=='yatzy':
+    elif choice == 'yatzy':
         return yatzycheck(cast)
     else:
-        return 'invalid category'
-    
+        return None  # Return None for invalid category
+
 def categorychoice(filledcategories,cast):
     categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
         "onepair", "twopairs", "threeofakind", "fourofakind",

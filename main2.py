@@ -15,7 +15,17 @@ def categorychoice(filledcategories, cast):
     if category not in categories:
         return 'Invalid category. Try again.'
 
+    # Calculate the score for the chosen category
     score = scorecalculation(category, cast)
+    print(f"Debug: Calculated score for {category} is {score}")  # Debugging output
+
+    # Attempt to convert score to an integer, handle invalid score
+    try:
+        score = int(score)
+    except (TypeError, ValueError):
+        return 'Error calculating score. Please try a different category.'
+
+    # Update filledcategories with the calculated score
     filledcategories[category] = score
 
     return f'You scored {score} points in the {category}', filledcategories
@@ -37,12 +47,18 @@ def menu():
                 posibilities(cast0)
                 break
 
-            # Get the indices for dice to reroll
-            replace_indices = list(map(int, selection.split()))
-            for i in replace_indices:
-                cast0[i - 1] = 9  # Mark dice to reroll with 9
+            # Get valid dice positions for reroll
+            replace_indices = []
+            for i in selection.split():
+                if i.isdigit() and 1 <= int(i) <= len(cast0):
+                    replace_indices.append(int(i) - 1)  # Adjust for zero-based indexing
+                else:
+                    print(f"Ignoring invalid position: {i}")
 
             # Reroll the selected dice
+            for i in replace_indices:
+                cast0[i] = 9  # Mark dice to reroll with 9
+
             cast0 = diceroll(cast0)
             throws += 1
             print(f"Your cast: {cast0}")
@@ -50,18 +66,18 @@ def menu():
 
         print(displayscoreboard(filledcategories))
 
-        # Call categorychoice function
+        # Now ask for the category choice after rerolls are finalized
         result = categorychoice(filledcategories, cast0)
 
-        # Check if result is a string (error message) without isinstance
-        if type(result) == str:
-            print(result)  # Print the message if the category is filled or invalid
-            continue  # Skip the rest of this loop and ask for input again
+        # Check if result is an error message
+        if isinstance(result, str):
+            print(result)  # Print error message if the category is filled or invalid
+            continue  # Go back to reroll phase
 
-        # Otherwise, update filledcategories with the dictionary from result
+        # Otherwise, update filledcategories with the score
         filledcategories = result[1]
 
-        # Get the last added category to calculate score
+        # Get the last added category and its score
         last_category = list(filledcategories.keys())[-1]
         score = int(filledcategories[last_category])
         totalscore += score
