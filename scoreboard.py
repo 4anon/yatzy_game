@@ -50,11 +50,6 @@ def scorecalculation(choice, cast):
     elif choice == 'yatzy':
         return yatzycheck(cast)
     else:
-<<<<<<< HEAD
-        return 'invalid category'
-    
-def categorychoice(pssibility,filledcategories,cast):
-=======
         return None  # Return None for invalid category
 
 def categorychoice(filledcategories,cast):
@@ -62,13 +57,11 @@ def categorychoice(filledcategories,cast):
         "onepair", "twopairs", "threeofakind", "fourofakind",
         "smallstraight", "largestraight", "fullhouse", "chance", "yatzy"]
     
->>>>>>> a08cc76699779df84036a7d2b1245dbda231584f
     category=input('enter a category').strip().lower()
-    if category in filledcategory:
+    if category in filledcategories:
         return 'this category is filled choose a different one'
-    if category not in possibility:
+    if category not in categories:
         return 'invalid category try again'
-    score=scorecalculation(cast,category)
     filledcategories[category]=score
     return f'You scored {score} points in the {category}',filledcategories
 
