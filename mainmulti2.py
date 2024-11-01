@@ -19,7 +19,7 @@ def categorychoice(filledcategories,cast):
     
         filledcategories[category]=int(score)
         return f'You scored {score} points in the {category}',filledcategories
-    except (ValuError,TypeError):
+    except (ValueError,TypeError):
         return'Type error or Value error try again'
     
     
@@ -34,8 +34,8 @@ def menu():
         playernames.append(name)
         playerscore[player]={}
         totalscore[player]=0
-    global highscorename,highscorevalue
-    highscorename,highscorevalue=highscoreinstall()
+    #DEBUG global highscorename,highscorevalue
+    #DEBUG highscorename,highscorevalue=highscoreinstall()
     while len(filledcategories)<15:
         for player in range(nplayers):
             print(f'\n {playernames[player]}s TURN')
@@ -51,10 +51,11 @@ def menu():
                 if selection.lower() == 'n':
                     print("No rerolls selected.")
                     posibilities(cast0)
-                    chosencategory = input("Where do you want to put your score: ")
                     break
 
                 # Get the indices for dice to reroll
+                #TODO add error handling for user input
+
                 replace_indices = list(map(int, selection.split()))
                 for i in replace_indices:
                     cast0[i - 1] = 9  # Mark dice to reroll with 9
@@ -64,7 +65,7 @@ def menu():
                 throws += 1
                 print(f"Your cast: {cast0}")
                 posibilities(cast0)
-            print(displayscoreboard(filledcategories))
+            #print(displayscoreboard(filledcategories))
             while True:
                 result=categorychoice(filledcategories,cast0)
                 if result[0]:
@@ -79,6 +80,7 @@ def menu():
                     playerscore[player][category]=score
                     totalscore[player]+=score
                     print(f'category:{category} ,score:{score}')
+                    print(displayscoreboard(filledcategories))
                     break
                 else:
                     print('Either all categories are filled or invalid category.')
@@ -88,8 +90,8 @@ def menu():
         bonus=bonuscheck(playerscore[player])
         totalscore[player]+=bonus
         print(f'{playernames[player]} receives {bonus} points as bonus')
-    for player in range(nplayers):
-        highscorevalue,highscorename=highscore(totalscore[player],playernames[player]),
+    #DEBUG for player in range(nplayers):
+     #DEBUG   highscorevalue,highscorename=highscore(totalscore[player],playernames[player]),
     
     print('\n FINAL SCORES:')
     for player in range(nplayers):
