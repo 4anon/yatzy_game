@@ -100,15 +100,23 @@ def bonuscheck(scorecategories):
             return 50
     return 0
 highscore=0
-def highscore(totalscore):
-    global highscore
+def highscore(totalscore,playername):
+    global highscore,highscorename
     if totalscore>highscore:
         highscore=totalscore
-    return highscore
+        highscorename=playername
+    return highscore,highscorename
 def highscoreinstall():
-    with open('highscore.txt','r') as file:
-        score=file.read().strip()
-        return int(score)
-def uploadhighscore(highscore):
+      try: 
+          with open('highscore.txt','r') as file:
+            score=file.read().strip().split(',')
+            if len(score)==2:
+                highscorename=score[0]
+                highscore=int(score[1])
+                return highscorename,highscore
+      except ValueError:
+          return 'Value error'
+            
+def uploadhighscore(highscorename,highscore):
     with open('highscore.txt','w') as file:
-        file.write(str(highscore))
+        file.write(f'{highscorename}:{str(highscore)}')
