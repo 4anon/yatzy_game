@@ -28,16 +28,17 @@ def menu():
     totalscore={}
     nplayers=int(input('enter the number of players:'))
     playerscore={}
-    playerboard={}
+    playernames=[]
     for player in range(nplayers):
-        playerscore[player]=0
-        playerboard[player]={}
-    for player in range(nplayers):
+        name=input(f'Enter a name for player {player}: ')
+        playernames.append(name)
+        playerscore[player]={}
         totalscore[player]=0
- 
+    global highscorename,highscorevalue
+    highscorename,highscorevalue=highscoreinstall()
     while len(filledcategories)<15:
         for player in range(nplayers):
-            print(f'\n {player}s TURN')
+            print(f'\n {playernames[player]}s TURN')
             cast0 = diceroll([])
             throws = 0
             while throws < 2:
@@ -75,6 +76,7 @@ def menu():
                     for placement in filledcategories:
                         category=placement
                     score=filledcategories[category]
+                    playerscore[player][category]=score
                     totalscore[player]+=score
                     print(f'category:{category} ,score:{score}')
                     break
@@ -82,6 +84,13 @@ def menu():
                     print('Either all categories are filled or invalid category.')
         print(displayscoreboard(filledcategories))
         print(f'Your current total score is:{totalscore}')    
+    for player in range(nplayers):
+        bonus=bonuscheck(playerscore[player])
+        totalscore[player]+=bonus
+        print(f'{playernames[player]} receives {bonus} points as bonus')
+    for player in range(nplayers):
+        highscorevalue,highscorename=highscore(totalscore[player],playernames[player]),
+    
     print('\n FINAL SCORES:')
     for player in range(nplayers):
         print(f'player{player}:{totalscore[player]}')
