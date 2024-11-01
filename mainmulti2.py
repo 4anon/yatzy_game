@@ -45,9 +45,9 @@ def menu():
         
                 print(f"Current roll: {cast0}")
         
-        
+                
                 selection = input("Which dice do you want to reroll? (Enter positions separated by spaces, or 'n' for no rerolls): ")
-        
+                while selection != n or
                 if selection.lower() == 'n':
                     print("No rerolls selected.")
                     posibilities(cast0)
