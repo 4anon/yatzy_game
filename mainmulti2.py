@@ -29,16 +29,23 @@ def menu():
     nplayers=int(input('enter the number of players:'))
     playerscore={}
     playernames=[]
-    for player in range(nplayers):
-        name=input(f'Enter a name for player {player}: ')
-        playernames.append(name)
+    filledcategories_all={}
+    for member in range(nplayers):
+        player=input(f'Enter a name for player {player}: ')
+        playernames.append(player)
         playerscore[player]={}
         totalscore[player]=0
-    #DEBUG global highscorename,highscorevalue
-    #DEBUG highscorename,highscorevalue=highscoreinstall()
-    while len(filledcategories)<15:
-        for player in range(nplayers):
-            print(f'\n {playernames[player]}s TURN')
+        filledcategories_all[player]={}
+    global highscorename,highscorevalue
+    highscorename,highscorevalue=highscoreinstall()
+    if highscorename='':
+        print('no available highscore')
+    else:
+        print(f'the current highscore is {highscorename}:{highscorevalue}')
+    while any(len(filledcategories_all[player])<15 for player in playernames):
+        for player in playernames:
+          if len(filledcategories_all[player])<15:
+            print(f'\n {player}s TURN')
             cast0 = diceroll([])
             throws = 0
             while throws < 2:
@@ -65,36 +72,40 @@ def menu():
                 throws += 1
                 print(f"Your cast: {cast0}")
                 posibilities(cast0)
-            #print(displayscoreboard(filledcategories))
+           
             while True:
-                result=categorychoice(filledcategories,cast0)
+                result=categorychoice(filledcategories_all[player],cast0)
                 if result[0]:
                     print(result[0])
                 else:
-                    filledcategories=result[1]
+                    filledcategories_all[player]=result[1]
              
-                if filledcategories:
-                    for placement in filledcategories:
-                        category=placement
-                    score=filledcategories[category]
+                if filledcategories_all[player]:
+                  for category in filledcategories_all[player]:
+                    score=filledcategories[player][category]
                     playerscore[player][category]=score
                     totalscore[player]+=score
                     print(f'category:{category} ,score:{score}')
-                    print(displayscoreboard(filledcategories))
+                    print(displayscoreboard(filledcategories_all[player]))
                     break
                 else:
                     print('Either all categories are filled or invalid category.')
-        print(displayscoreboard(filledcategories))
-        print(f'Your current total score is:{totalscore}')    
-    for player in range(nplayers):
+        print(displayscoreboard(filledcategories_all[player]))
+        print(f'Your current total score is:{totalscore[player]}')    
+    for player in playernames:
         bonus=bonuscheck(playerscore[player])
         totalscore[player]+=bonus
-        print(f'{playernames[player]} receives {bonus} points as bonus')
-    #DEBUG for player in range(nplayers):
-     #DEBUG   highscorevalue,highscorename=highscore(totalscore[player],playernames[player]),
-    
+        print(f'{player} receives {bonus} points as bonus')
+    for player in playernames:
+        highscorevalue,highscorename=highscore(totalscore[player],playernames[player])
+    if highscorename:
+        uploadhigscore(highscorename,highscorevalue) 
     print('\n FINAL SCORES:')
-    for player in range(nplayers):
+    for player in playernames:
+        print(f'player{player}:{totalscore[player]}')
+    
+
+menu()
         print(f'player{player}:{totalscore[player]}')
     
 
