@@ -5,8 +5,8 @@ def posibilities(cast):
     posibility = {
         "ones": 0, "twos": 0, "threes": 0, "fours": 0, "fives": 0, "sixes": 0,
         "one pair": 0, "two pairs": 0, "three of a kind": 0, "four of a kind": 0,'five of a kind':0
-        'villa':0 , 'tower':0
-        "small straight": 0, "big straight": 0, "full house": 0, "chance":0, "yatzy": 0
+        'villa':0 , 'tower':0,
+        "small straight": 0, "big straight": 0,'full straight':0, "full house": 0, "chance":0, "yatzy": 0
     }
 
     # Count occurrences of each number
