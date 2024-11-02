@@ -109,16 +109,16 @@ def highscore(totalscore,playername):
     
 def highscoreinstall():
     try: 
-        with open('highscore.txt', 'r') as file:
+        with open('highscore.txt','r') as file:
             score = file.read().strip().split(',')
             if len(score) == 2:
                 highscorename = score[0]
                 highscore = int(score[1])
                 return highscorename, highscore
             else:
-                return None, 0  # Fallback if the file doesn’t contain two elements
+                return '',0  # Fallback if the file doesn’t contain two elements
     except (ValueError, FileNotFoundError):  # Handle both missing file and value errors
-        return None, 0  # Default return value if there's an error
+        return '',0  # Default return value if there's an error
 
 def uploadhighscore(highscorename, highscore):
     with open('highscore.txt', 'w') as file:
