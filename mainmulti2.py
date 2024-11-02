@@ -7,7 +7,7 @@ from scoring import *
 def categorychoice(filledcategories,cast):
     categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
         "one pair", "two pairs", "three of a kind", "four of a kind",
-        "small straight", "large straight", "full house", "chance", "yatzy"]
+        'five of a kind',"small straight", "large straight",'fullstraight','villa','tower',"full house", "chance", "yatzy"]
     
     category=input('enter a category: ').strip().lower()
     if category in filledcategories:
