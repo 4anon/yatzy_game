@@ -60,4 +60,20 @@ def scorecalculation(choice, cast):
     else:
         return None  # Return None for invalid category
 
-
+def categorychoice(filledcategories,cast):
+    categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
+        "one pair", "two pairs", "three of a kind", "four of a kind",
+        "small straight", "large straight", "full house", "chance", "yatzy"]
+    
+    category=input('enter a category: ').strip().lower()
+    if category in filledcategories:
+        return 'this category is filled choose a different one'
+    if category not in categories:
+        return 'invalid category try again'
+    try:
+        score=scorecalculation(category,cast)
+    
+        filledcategories[category]=int(score)
+        return f'You scored {score} points in the {category}',filledcategories
+    except (ValueError,TypeError):
+        return'Type error or Value error try again'
