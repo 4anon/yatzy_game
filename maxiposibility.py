@@ -4,9 +4,7 @@ import random
 def posibilities(cast):
     posibility = {
         "ones": 0, "twos": 0, "threes": 0, "fours": 0, "fives": 0, "sixes": 0,
-        "one pair": 0, "two pairs": 0, "three of a kind": 0, "four of a kind": 0,'five of a kind':0
-        'villa':0 , 'tower':0,
-        "small straight": 0, "big straight": 0,'full straight':0, "full house": 0, "chance":0, "yatzy": 0
+        "one pair": 0, "two pairs": 0, "three of a kind": 0, "four of a kind": 0, 'five of a kind':0, 'villa':0 , 'tower':0, "small straight": 0, "big straight": 0,'full straight':0, "full house": 0, "chance":0, "yatzy": 0
     }
 
     # Count occurrences of each number
@@ -78,7 +76,7 @@ def posibilities(cast):
         if two+three==2:
             posibility['full house']=sum(cast)
     posibility['chance']=sum(cast)
-    if len(counts)==1
+    if len(counts) == 1:
         posibility['yatzy']=100
     threekind=[]
     for num,count in counts.items():
@@ -86,17 +84,17 @@ def posibilities(cast):
             threekind.append(num)
     if len(threekind)>=2:
         posibility['villa']=sum(cast)
-    fourkind=0
-    pair=0
+    fourkind = 0
+    pair = 0
     for count in counts.values():
-        if count>=4:
-            fourkind=1
-        if count>=2:
-            pair=1
-    if fourkind+pair==2:
-        posibility['tower']=sum(cast)
-    for key,value in possibility.items():
-        if value!=0:
+        if count >= 4:
+            fourkind = 1
+        if count >= 2:
+            pair = 1
+    if fourkind + pair == 2:
+        posibility['tower'] = sum(cast)
+    for key,value in posibility.items():
+        if value != 0:
             print(f'{key}:your value:{value}')
     
     return posibility

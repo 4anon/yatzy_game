@@ -33,7 +33,7 @@ def scorecalculation(choice, cast):
         return scorenumber(cast, 6)
     elif choice == 'onepair':
         return onepair(cast)
-    elif choice == 'twopair':
+    elif choice == 'twopairs':
         return twopair(cast)
     elif choice == 'threeofakind':
         return threekind(cast)
@@ -60,20 +60,25 @@ def scorecalculation(choice, cast):
     else:
         return None  # Return None for invalid category
 
-def categorychoice(filledcategories,cast):
-    categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
+def categorychoice(filledcategories, cast):
+    categories = [
+        "ones", "twos", "threes", "fours", "fives", "sixes",
         "one pair", "two pairs", "three of a kind", "four of a kind",
-        'five of a kind',"small straight", "large straight",'fullstraight','villa','tower',"full house", "chance", "yatzy"]
+        'five of a kind', "small straight", "large straight", 'fullstraight',
+        'villa', 'tower', "full house", "chance", "yatzy"
+    ]
     
-    category=input('enter a category: ').strip().lower()
+    category = input('Enter a category: ').strip().lower()
+    print(f"Debug: Current filled categories are {filledcategories}")  # Debug 
+
     if category in filledcategories:
-        return 'this category is filled choose a different one'
+        return 'This category is filled, choose a different one', filledcategories  # Return a tuple
     if category not in categories:
-        return 'invalid category try again'
+        return 'Invalid category, try again', filledcategories  # Return a tuple
+
     try:
-        score=scorecalculation(category,cast)
-    
-        filledcategories[category]=int(score)
-        return f'You scored {score} points in the {category}',filledcategories
-    except (ValueError,TypeError):
-        return'Type error or Value error try again'
+        score = scorecalculation(category, cast)
+        filledcategories[category] = int(score)  # Update filled categories with the score
+        return f'You scored {score} points in the {category}', filledcategories  # Return success message and updated categories
+    except (ValueError, TypeError):
+        return 'Type error or value error, try again', filledcategories  # Return a tuple

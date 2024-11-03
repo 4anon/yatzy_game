@@ -142,7 +142,7 @@ def tower(dice):
         return sum(dice)
     return 0
         
-def bonuscheck(scorecategories):
+def bonuscheck(scoredcategories):
     uppersection=['ones','twos','threes','fours','fives','sixes']
     upperscore=0
     for category in uppersection:
@@ -151,15 +151,18 @@ def bonuscheck(scorecategories):
         if upperscore>=73:
             return 50
     return 0
-highscore=0
-highscorename=''
-def highscore(totalscore,playername):
-    global highscore,highscorename
-    if totalscore>highscore:
-        highscore=totalscore
-        highscorename=playername
-    return highscore,highscorename
     
+# Change global variable names to avoid conflicts with function names
+highest_score = 0
+highscorename = ''
+
+def highscore(totalscore, playername):
+    global highest_score, highscorename  # Updated variable name
+    if totalscore > highest_score:       # Use updated variable here
+        highest_score = totalscore       # Update the correct variable
+        highscorename = playername
+    return highest_score, highscorename
+
 def highscoreinstall():
     try: 
         with open('highscore.txt','r') as file:
@@ -175,4 +178,4 @@ def highscoreinstall():
 
 def uploadhighscore(highscorename, highscore):
     with open('highscore.txt', 'w') as file:
-        file.write(f'{highscorename},{str(highscore)}'
+        file.write(f'{highscorename},{str(highscore)}')

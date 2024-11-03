@@ -38,7 +38,7 @@ def menu():
         filledcategories_all[player]={}
     global highscorename,highscorevalue
     highscorename,highscorevalue=highscoreinstall()
-    if highscorename='':
+    if highscorename == '':
         print('no available highscore')
     else:
         print(f'the current highscore is {highscorename}:{highscorevalue}')
@@ -54,7 +54,7 @@ def menu():
         
                 
                 selection = input("Which dice do you want to reroll? (Enter positions separated by spaces, or 'n' for no rerolls): ")
-                while selection != n or
+                
                 if selection.lower() == 'n':
                     print("No rerolls selected.")
                     posibilities(cast0)
@@ -105,8 +105,7 @@ def menu():
         print(f'player{player}:{totalscore[player]}')
     
 
-menu()
-        print(f'player{player}:{totalscore[player]}')
+
     
 
 menu()
