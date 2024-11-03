@@ -1,4 +1,3 @@
-from dice import *
 from maxiposibility import *
 from maxiboard import *
 from maxiscoring import *
