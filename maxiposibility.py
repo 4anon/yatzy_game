@@ -4,7 +4,7 @@ import random
 def posibilities(cast):
     posibility = {
         "ones": 0, "twos": 0, "threes": 0, "fours": 0, "fives": 0, "sixes": 0,
-        "one pair": 0, "two pairs": 0, "three of a kind": 0, "four of a kind": 0, 'five of a kind':0, 'villa':0 , 'tower':0, "small straight": 0, "big straight": 0,'full straight':0, "full house": 0, "chance":0, "yatzy": 0
+        "one pair": 0, "two pairs": 0, "three of a kind": 0, "four of a kind": 0, 'five of a kind':0, 'villa':0 , 'tower':0, "small straight": 0, "large straight": 0,'full straight':0, "full house": 0, "chance":0, "yatzy": 0
     }
 
     # Count occurrences of each number
@@ -62,7 +62,7 @@ def posibilities(cast):
         posibility['small straight']=15
 
     if (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts):
-        posibility['big straight']=20
+        posibility['large straight']=20
     if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts):
         posibility['full straight']=21
     if len(counts)==2:

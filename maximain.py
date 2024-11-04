@@ -32,12 +32,13 @@ def menu():
             elif player in playernames:
                 print(f"Name '{player}' is already taken. Please choose a different name.")
             else:
-                playernames.append(player)
+                playernames.append(player)  # Only add once, inside the validation loop
                 break  # Exit loop if valid
-        playernames.append(player)
+
         playerscore[player] = {}
         totalscore[player] = 0
         filledcategories_all[player] = {}
+
 
     global highscorename,highscorevalue
     highscorename,highscorevalue = highscoreinstall()
@@ -50,10 +51,10 @@ def menu():
     gamefinished = 0
     try:
         while gamefinished == 0:
-            gamefinished = 1
+            gamefinished = 1  # Assume game is finished unless proven otherwise
             for player in playernames:
-                if len(filledcategories_all[player]) < 21:
-                    gamefinished = 0
+                if len(filledcategories_all[player]) < 21:  # Check if player has categories left to fill
+                    gamefinished = 0  # Set gamefinished to 0 if at least one player has categories left
                     print(f'{player}\'s TURN')
                     cast0 = diceroll([])
                     throws = 0
@@ -63,8 +64,7 @@ def menu():
                         if selection.lower() == 'n':
                             print('No rerolls selected')
                             posibilities(cast0)
-                            # Proceed directly to category choice if "n" is selected
-                            break  
+                            break  # Proceed directly to category choice if "n" is selected
 
                         try:
                             replaceindices = list(map(int, selection.split()))
@@ -84,13 +84,11 @@ def menu():
                         print(f'Your new roll: {cast0}')
                         posibilities(cast0)
 
-                        # Ask if the player wants to reroll again
                         if throws < 2:
                             reroll_prompt = input("Would you like to reroll again? (y/n): ")
                             if reroll_prompt.lower() == 'n':
                                 break  # Break here to go to category choice if "n" is chosen
 
-                    # Directly proceed to category choice after rerolls are completed or "n" is chosen
                     print('\nProceeding to category choice...')
                     
                     category_chosen = False  # Added
@@ -98,26 +96,23 @@ def menu():
                     while not category_chosen:  # Added instead of while true
                         result, updated_categories = categorychoice(filledcategories_all[player], cast0)
                         print(result)
-
-                        # Check if the category was successfully filled
                         if "scored" in result:  # Success message implies category was added
                             for category in updated_categories:
                                 score = updated_categories[category]
                                 playerscore[player][category] = score
                                 totalscore[player] += score
                                 print(f'Category: {category}, Score: {score}')
-                                
-                            # Set category_chosen to True to exit loop
-                            category_chosen = True  
+                            category_chosen = True
+                            break 
                         else:
                             print('Either all categories are filled or invalid category. Try again.')
-
+                    print(f'\n{player.capitalize()}:')
                     print(displayscoreboard(filledcategories_all[player]))
                     print(f'Your current total score is: {totalscore[player]}')
-                    
-    #error handling for unexpected errors
+
     except Exception as e:
         print(f"An unexpected error occurred: {e}. Please try again.")
+
 
 
     # Final score and high score display
