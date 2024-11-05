@@ -179,3 +179,25 @@ def highscoreinstall():
 def uploadhighscore(highscorename, highscore):
     with open('highscore.txt', 'w') as file:
         file.write(f'{highscorename},{str(highscore)}')
+
+
+def uploadhighscore2(highscorename, highscore):
+    try:
+        with open('highscore.txt','r') as file:
+            lines=files.readlines()
+        highscores=[]
+        for line in lines:
+            if linestrip():
+                name,score=line.strip().split(':')
+                highscores.append((name,int(score)))
+        highscores.append((highscorename,highscore))
+        for i in range(len(highscores)):
+            for j in range(i+1,len(highscores)):
+                if highscores[j][1]>highscores[i][1]:
+                    highscores[i],highscores[j]=highscores[j],highscores[i]
+        with open('highscore.txt','w') as file:
+            for name,score in highscores:
+                file.write(f'{name}:{score}\n')
+    except FileNotFoundError:
+        with open('highscore.txt','r') as file:
+            file.write(f'{name}:{score}\n')
