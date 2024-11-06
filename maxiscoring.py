@@ -144,12 +144,12 @@ def tower(dice):
     return 0
         
 def bonuscheck(scoredcategories):
-    uppersection=['ones','twos','threes','fours','fives','sixes']
-    upperscore=0
+    uppersection = ['ones','twos','threes','fours','fives','sixes']
+    upperscore = 0
     for category in uppersection:
         if category in scoredcategories:
-            upperscore+=scoredcategories[category]
-        if upperscore>=73:
+            upperscore += scoredcategories[category]
+        if upperscore >= 73:
             return 50
     return 0
     
@@ -185,17 +185,17 @@ def uploadhighscore(highscorename, highscore):
 def uploadhighscore2(highscorename, highscore):
     try:
         with open('highscore.txt','r') as file:
-            lines=file.readlines()
-        highscores=[]
+            lines = file.readlines()
+        highscores = []
         for line in lines:
             if linestrip():
-                name,score=line.strip().split(':')
+                name,score = line.strip().split(':')
                 highscores.append((name,int(score)))
         highscores.append((highscorename,highscore))
         for i in range(len(highscores)):
             for j in range(i+1,len(highscores)):
-                if highscores[j][1]>highscores[i][1]:
-                    highscores[i],highscores[j]=highscores[j],highscores[i]
+                if highscores[j][1] > highscores[i][1]:
+                    highscores[i],highscores[j] = highscores[j],highscores[i]
         with open('highscore.txt','w') as file:
             for name,score in highscores:
                 file.write(f'{name}:{score}\n')

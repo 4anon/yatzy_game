@@ -53,7 +53,7 @@ def menu():
         while gamefinished == 0:
             gamefinished = 1  # Assume game is finished unless proven otherwise
             for player in playernames:
-                if len(filledcategories_all[player]) < 21:  # Check if player has categories left to fill
+                if len(filledcategories_all[player]) < 19:  # Check if player has categories left to fill
                     gamefinished = 0  # Set gamefinished to 0 if at least one player has categories left
                     print(f'{player}\'s TURN')
                     cast0 = diceroll([])
@@ -124,8 +124,8 @@ def menu():
     for player in playernames:
         highscorevalue, highscorename = highscore(totalscore[player], player)
     if highscorename:
-        uploadhighscore(highscorename, highscorevalue) 
-    print('\n FINAL SCORES:')
+        uploadhighscore2(highscorename, highscorevalue) 
+        print('\n FINAL SCORES:')
     for player in playernames:
         print(f'player{player}:{totalscore[player]}')
 
