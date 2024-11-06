@@ -90,7 +90,7 @@ def menu():
                                 break  # Break here to go to category choice if "n" is chosen
 
                     print('\nProceeding to category choice...')
-                    
+                    print(displayscoreboard(filledcategories_all[player]))
                     category_chosen = False  # Added
                     
                     while not category_chosen:  # Added instead of while true
