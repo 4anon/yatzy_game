@@ -188,7 +188,7 @@ def uploadhighscore2(highscorename, highscore):
             lines = file.readlines()
         highscores = []
         for line in lines:
-            if linestrip():
+            if line.strip():
                 name,score = line.strip().split(':')
                 highscores.append((name,int(score)))
         highscores.append((highscorename,highscore))
@@ -200,5 +200,5 @@ def uploadhighscore2(highscorename, highscore):
             for name,score in highscores:
                 file.write(f'{name}:{score}\n')
     except FileNotFoundError:
-        with open('highscore.txt','r') as file:
+        with open('highscore.txt','w') as file:
             file.write(f'{name}:{score}\n')
