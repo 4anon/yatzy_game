@@ -90,6 +90,7 @@ def menu():
                                 break  # Break here to go to category choice if "n" is chosen
 
                     print('\nProceeding to category choice...')
+                    print(f'\n{player.capitalize()}:')
                     print(displayscoreboard(filledcategories_all[player]))
                     category_chosen = False  # Added
                     
