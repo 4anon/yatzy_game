@@ -98,10 +98,11 @@ def menu():
                         print(result)
                         if "scored" in result:  # Success message implies category was added
                             for category in updated_categories:
-                                score = updated_categories[category]
-                                playerscore[player][category] = score
-                                totalscore[player] += score
-                                print(f'Category: {category}, Score: {score}')
+                                if category not in playerscore[player]:
+                                    score = updated_categories[category]
+                                    playerscore[player][category] = score
+                                    totalscore[player] += score
+                                    print(f'Category: {category}, Score: {score}')
                             category_chosen = True
                             break 
                         else:
