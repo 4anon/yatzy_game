@@ -16,8 +16,8 @@ def totalscore(dice):
     return sum(dice)
 
 def fiveofakind(dice):
-    for die in set(dice):
-        if dice.count(die)==5:
+    for die in dice:
+        if dice.count(die)>=5:
           return die*5
     return 0
 
@@ -47,14 +47,14 @@ def scorepair(dice):
     return score
 
 def onepair(dice):
-    for die in set(dice):
+    for die in range(6,0,-1):
         if dice.count(die)>=2:
             score=die*2
             return score
     return 0
 def twopair(dice):
     pairs=[]
-    for die in set(dice):
+    for die in range(6,0,-1):
         if dice.count(die)>=2:
             pairs.append(die)
     if len(pairs)>=2:
@@ -63,14 +63,14 @@ def twopair(dice):
     return 0
 
 def threekind(dice):
-    for die in set(dice):
+    for die in range(6,0,-1):
         if dice.count(die)>=3:
             score=die*3
             return score
     return 0
 
 def fourkind(dice):
-    for die in set(dice):
+    for die in dice:
         if dice.count(die)>=4:
             score=die*4
             return score
