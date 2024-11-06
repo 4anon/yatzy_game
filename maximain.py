@@ -126,7 +126,7 @@ def menu():
     if highscorename:
         uploadhighscore2(highscorename, highscorevalue) 
     print('\n FINAL SCORES:')
-    sortedscore=sorted(totalscore.items(),key=lamba item: item[1],reverse=True)
+    sortedscore=sorted(totalscore.items(),key=lambda item: item[1],reverse=True)
     winner,topscore=max(sortedscore)
     for player,score in sortedscore:
         print(f'{player}:{score}')
