@@ -68,7 +68,7 @@ def posibilities(cast):
     if len(counts)==2:
         two=0
         three=0
-        for count in count.values():
+        for count in counts.values():
             if count==2:
                 two=1
             elif count==3:

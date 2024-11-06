@@ -1,10 +1,10 @@
 import random
-from scoring import *
+from maxiscoring import *
 
 def displayscoreboard(scoredcategories):
     categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
         "one pair", "two pairs", "three of a kind", "four of a kind",
-        'five of a kind',"small straight", "large straight",'fullstraight','villa','tower',"full house", "chance", "yatzy"]
+        "five of a kind","small straight", "large straight","fullstraight","villa","tower","full house", "chance", "yatzy"]
     lines=['SCOREBOARD']
     for category in categories:
        if category in scoredcategories:
@@ -39,7 +39,7 @@ def scorecalculation(choice, cast):
         return threekind(cast)
     elif choice == 'fourofakind':
         return fourkind(cast)
-    elif choice=='fiveofkind':
+    elif choice=='fiveofakind':
         return fiveofakind(cast)
     elif choice == 'smallstraight':
         return smallstraight(cast)
@@ -64,12 +64,11 @@ def categorychoice(filledcategories, cast):
     categories = [
         "ones", "twos", "threes", "fours", "fives", "sixes",
         "one pair", "two pairs", "three of a kind", "four of a kind",
-        'five of a kind', "small straight", "large straight", 'fullstraight',
-        'villa', 'tower', "full house", "chance", "yatzy"
+        "five of a kind", "small straight", "large straight", "fullstraight",
+        "villa", "tower", "full house", "chance", "yatzy"
     ]
     
     category = input('Enter a category: ').strip().lower()
-    print(f"Debug: Current filled categories are {filledcategories}")  # Debug 
 
     if category in filledcategories:
         return 'This category is filled, choose a different one', filledcategories  # Return a tuple

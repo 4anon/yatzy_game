@@ -1,4 +1,5 @@
 import random
+
 def diceroll(reroll):
     rolls=[]
     if not reroll:
