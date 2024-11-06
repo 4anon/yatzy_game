@@ -185,7 +185,7 @@ def uploadhighscore(highscorename, highscore):
 def uploadhighscore2(highscorename, highscore):
     try:
         with open('highscore.txt','r') as file:
-            lines=files.readlines()
+            lines=file.readlines()
         highscores=[]
         for line in lines:
             if linestrip():
