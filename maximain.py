@@ -125,7 +125,7 @@ def menu():
         highscorevalue, highscorename = highscore(totalscore[player], player)
     if highscorename:
         uploadhighscore(highscorename, highscorevalue) 
-        print('\n FINAL SCORES:')
+    print('\n FINAL SCORES:')
     for player in playernames:
         print(f'player{player}:{totalscore[player]}')
 
