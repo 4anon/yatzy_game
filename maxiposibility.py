@@ -2,6 +2,7 @@ from collections import Counter
 import random
 
 def posibilities(cast):
+    #posibility dict for initialization
     posibility = {
         "ones": 0, "twos": 0, "threes": 0, "fours": 0, "fives": 0, "sixes": 0,
         "one pair": 0, "two pairs": 0, "three of a kind": 0, "four of a kind": 0, 'five of a kind':0, 'villa':0 , 'tower':0, "small straight": 0, "large straight": 0,'full straight':0, "full house": 0, "chance":0, "yatzy": 0
@@ -54,38 +55,46 @@ def posibilities(cast):
         if count >= 4:
             posibility["four of a kind"] = num * 4
             break  # Stop after finding the first three of a kind
-    for num,count in counts.items():
+    for num,count in counts.items(): #5 of a kind
         if count >=5:
-            posibility['five of a kind']=num*5
+            posibility['five of a kind'] = num*5
             break
-    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts):
-        posibility['small straight']=15
+    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts): #small straight
+        posibility['small straight'] = 15
 
-    if (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts):
-        posibility['large straight']=20
-    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts):
-        posibility['full straight']=21
-    if len(counts)==2:
-        two=0
-        three=0
+    if (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts): # large straight
+        posibility['large straight'] = 20
+
+    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts): #full straight
+        posibility['full straight'] = 21
+
+    #full house
+    if len(counts) == 2:
+        two = 0
+        three = 0
         for count in counts.values():
-            if count==2:
+            if count == 2:
                 two=1
             elif count==3:
                 three=1
         if two+three==2:
-            posibility['full house']=sum(cast)
-    posibility['chance']=sum(cast)
+            posibility['full house'] = sum(cast)
+
+    posibility['chance'] = sum(cast) #chance 
     if len(counts) == 1:
-        posibility['yatzy']=100
-    threekind=[]
-    for num,count in counts.items():
+        posibility['yatzy'] = 100
+
+    threekind = []
+    for num,count in counts.items(): #threekind
         if count>=3:
             threekind.append(num)
-    if len(threekind)>=2:
+
+    if len(threekind)>=2: #villa 
         posibility['villa']=sum(cast)
+
     fourkind = 0
     pair = 0
+    # tower
     for count in counts.values():
         if count >= 4:
             fourkind = 1
@@ -93,10 +102,12 @@ def posibilities(cast):
             pair = 1
     if fourkind + pair == 2:
         posibility['tower'] = sum(cast)
+
     for key,value in posibility.items():
         if value != 0:
             print(f'{key}:your value:{value}')
-    
+            
+    #returns the dict with the posibilities
     return posibility
     
 
