@@ -1,6 +1,6 @@
 import random
-
-def diceroll(reroll):
+#imports random module 
+def diceroll(reroll): #defines diceroll function takes in a list if the list is empty creates the dice roll for the game if not it checks which values are to be rerolled basedon the placement holder 9 in cooperation with main
     rolls=[]
     if not reroll:
       for i in range(6):
@@ -13,23 +13,23 @@ def diceroll(reroll):
        rolls=reroll
     return rolls
 
-def totalscore(dice):
+def totalscore(dice): 
     return sum(dice)
 
-def fiveofakind(dice):
+def fiveofakind(dice): #checks for a five of a kind by using the count function so see the number of elements with a specified value then retruns the sum 
     for die in dice:
         if dice.count(die)>=5:
           return die*5
     return 0
 
 
-def yatzycheck(dice):
+def yatzycheck(dice): #checks for a yatzy  by using the count function so see the number of elements with a specified value then returns 1o0 points  
     score=0
     if dice.count(dice[0])==6:
         score=100
     return score
 
-def scorenumber(dice,number):
+def scorenumber(dice,number): #scores the ones-sixes categories by using the count function to check number of elements with a specified value then returns the multiplication and takes in a number as an input
     count=dice.count(number)
     score=count*number
     return score
@@ -47,13 +47,13 @@ def scorepair(dice):
     score=highestpair*2
     return score
 
-def onepair(dice):
+def onepair(dice):  #checks for one pair by using the count function so see the number of elements with a specified value then retruns the sum.Also iterates through the dice values in a descending order to always return the largest one pair
     for die in range(6,0,-1):
         if dice.count(die)>=2:
             score=die*2
             return score
     return 0
-def twopair(dice):
+def twopair(dice): #checks for two pairs by appending thems to a list using the count function so see the number of elements with a specified value then retruns the sum.Also iterates through the dice values in a descending order to always return the largest pairs
     pairs=[]
     for die in range(6,0,-1):
         if dice.count(die)>=2:
@@ -63,37 +63,37 @@ def twopair(dice):
         return score
     return 0
 
-def threekind(dice):
+def threekind(dice):  #checks for three kind by using the count function so see the number of elements with a specified value then retruns the sum.Also iterates through the dice values in a descending order to always return the largest three kind
     for die in range(6,0,-1):
         if dice.count(die)>=3:
             score=die*3
             return score
     return 0
 
-def fourkind(dice):
+def fourkind(dice):  #checks for a four of a kind by using the count function so see the number of elements with a specified value then retruns the sum 
     for die in dice:
         if dice.count(die)>=4:
             score=die*4
             return score
     return 0
-def smallstraight(dice):
+def smallstraight(dice): #checks for a small straight by seeing if the sorted and unique dice values match the small straight numbers
     sorteddice=sorted(set(dice))
     if sorteddice==[1,2,3,4,5]:
         return 15
     return 0
 
-def largestraight(dice):
+def largestraight(dice): #checks for a large  straight by seeing if the sorted and unique dice values match the small straight numbers
     sorteddice=sorted(set(dice))
     if sorteddice==[2,3,4,5,6]:
         return 20
     return 0
-def fullstraight(dice):
+def fullstraight(dice): #checks for a full  straight by seeing if the sorted and unique dice values match the small straight numbers
     sorteddice=sorted(set(dice))
     if sorteddice==[1,2,3,4,5,6]:
         return 21
     return 0
 
-def fullhouse(dice):
+def fullhouse(dice): #checks for full house by utilizing a dictionary to keep count of how many times a dice value appears.Then checks if the frequencies match the full house combination and returns sum 
     counts={}
     for die in dice:
         if die in counts:
@@ -111,7 +111,7 @@ def fullhouse(dice):
         return sum(dice)
     return 0   
     
-def villa(dice):
+def villa(dice): #checks for villa by utilizing a dictionary to keep count of how many times a dice value appears.Then checks if the frequencies match the villa combination and returns sum
     counts={}
     for die in dice:
         if die in counts:
@@ -125,7 +125,7 @@ def villa(dice):
     if threeofkind==2:
         return sum(dice)
     return 0
-def tower(dice):
+def tower(dice): #checks for tower by utilizing a dictionary to keep count of how many times a dice value appears.Then checks if the frequencies match the tower combination and returns sum
     counts={}
     for die in dice:
         if die in counts:
@@ -143,7 +143,7 @@ def tower(dice):
         return sum(dice)
     return 0
         
-def bonuscheck(scoredcategories):
+def bonuscheck(scoredcategories): #checks if the upper section categories are more than 73 points then returns the 50 point bonus.It does this by defining a list that matche the upper section categories of of all categories and summing them in score
     uppersection = ['ones','twos','threes','fours','fives','sixes']
     upperscore = 0
     for category in uppersection:
@@ -153,18 +153,18 @@ def bonuscheck(scoredcategories):
             return 50
     return 0
     
-# Change global variable names to avoid conflicts with function names
+#change global variable names to avoid conflicts with function names
 highest_score = 0
 highscorename = ''
 
-def highscore(totalscore, playername):
-    global highest_score, highscorename  # Updated variable name
-    if totalscore > highest_score:       # Use updated variable here
-        highest_score = totalscore       # Update the correct variable
+def highscore(totalscore, playername): #takes as an iput the players total score and playername checks if total score is the highest score  in cooperation with main
+    global highest_score, highscorename  #updates variable name
+    if totalscore > highest_score:       #uses updated variable here
+        highest_score = totalscore       
         highscorename = playername
     return highest_score, highscorename
 
-def highscoreinstall():
+def highscoreinstall(): #error handling for valueerror and file errors, reads the file and returns the highscore name in the file as well as the highscore converted into an integer 
     try: 
         with open('highscore.txt','r') as file:
             score = file.read().strip().split(',')
@@ -175,14 +175,14 @@ def highscoreinstall():
             else:
                 return '',0  # Fallback if the file doesn’t contain two elements
     except (ValueError, FileNotFoundError):  # Handle both missing file and value errors
-        return '',0  # Default return value if there's an error
+        return '',0  #retrun values if theres an error 
 
 def uploadhighscore(highscorename, highscore):
     with open('highscore.txt', 'w') as file:
         file.write(f'{highscorename},{str(highscore)}')
 
 
-def uploadhighscore2(highscorename, highscore):
+def uploadhighscore2(highscorename, highscore): #sorts the highscores in the file in desceding order using a sorting algorithm then writes the new highscore based on the order ,if theres a file error it creates a new file with the current highscore
     try:
         with open('highscore.txt','r') as file:
             lines = file.readlines()
