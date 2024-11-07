@@ -26,7 +26,7 @@ def posibilities(cast):
         elif number == 6:
             posibility["sixes"] += count * 6
     
-    #one pair
+    #identifies highest pair and assigns it to one pair
     highest_pair = 0
     for num, count in counts.items():
         if count >= 2:
@@ -34,31 +34,37 @@ def posibilities(cast):
             if pair_value > highest_pair:
                 highest_pair = pair_value
 
-    posibility["one pair"] = highest_pair
+    posibility["one pair"] = 
 
+    #appends the values of the two largest pairs
     two_pair_values = []
     for num, count in counts.items():
         if count >= 2:
             two_pair_values.append(num)
-
     if len(two_pair_values) >= 2:
         posibility["two pairs"] = (two_pair_values[0] + two_pair_values[1]) * 2
         
-    # Check for three of a kind
+    # Check for the highest "three of a kind"
+    highest_three_of_a_kind = 0
     for num, count in counts.items():
         if count >= 3:
-            posibility["three of a kind"] = num * 3
-            break  # Stop after finding the first three of a kind
+            three_of_a_kind_value = num * 3
+            if three_of_a_kind_value > highest_three_of_a_kind:
+                highest_three_of_a_kind = three_of_a_kind_value
+    posibility["three of a kind"] = highest_three_of_a_kind
+            
             
     # four of a kind  
     for num, count in counts.items():
         if count >= 4:
             posibility["four of a kind"] = num * 4
             break  # Stop after finding the first three of a kind
+
     for num,count in counts.items(): #5 of a kind
-        if count >=5:
-            posibility['five of a kind'] = num*5
+        if count >= 5:
+            posibility['five of a kind'] = num * 5
             break
+
     if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts): #small straight
         posibility['small straight'] = 15
 
@@ -74,24 +80,27 @@ def posibilities(cast):
         three = 0
         for count in counts.values():
             if count == 2:
-                two=1
-            elif count==3:
-                three=1
-        if two+three==2:
+                two = 1
+            elif count == 3:
+                three = 1
+        if two + three == 2:
             posibility['full house'] = sum(cast)
+    #chance        
+    posibility['chance'] = sum(cast)  
 
-    posibility['chance'] = sum(cast) #chance 
+    #if all dice in counts are the same
     if len(counts) == 1:
         posibility['yatzy'] = 100
 
-    threekind = []
+    threekind = [] # Initialize an empty list to store numbers that appear three or more times
     for num,count in counts.items(): #threekind
-        if count>=3:
+        if count >= 3: #Check if this number appears three or more times
             threekind.append(num)
 
+    # Check if there are at least two different numbers that each appear three or more times        
     if len(threekind)>=2: #villa 
         posibility['villa']=sum(cast)
-
+        
     fourkind = 0
     pair = 0
     # tower
