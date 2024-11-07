@@ -69,7 +69,8 @@ def menu():
 
                         try:
                             replaceindices = list(map(int, selection.split()))
-                            if all(1 <= i <= len(cast0) for i in replaceindices): # go through the die in diceroll 
+                            #all() checks if all conditions inside are true
+                            if all(1 <= i <= len(cast0) for i in replaceindices): # This checks if each number i is within the valid range of dice positions
                                 for i in replaceindices:
                                     cast0[i - 1] = 9  # Mark dice for reroll
                             else:
