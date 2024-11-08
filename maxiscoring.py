@@ -103,11 +103,11 @@ def fullhouse(dice): #checks for full house by utilizing a dictionary to keep co
     pair=0
     triple=0
     for die in counts:
-        if counts[die]==2:
-            pair=1
-        elif counts[die]==3:
+        if counts[die]>=3:
             triple=1
-    if len(counts)==2 and pair+triple==2:
+        elif counts[die]>=2:
+            pair=1
+    if triple and pair:
         return sum(dice)
     return 0   
     
@@ -119,10 +119,10 @@ def villa(dice): #checks for villa by utilizing a dictionary to keep count of ho
         else:
             counts[die]=1
     threeofkind=0
-    for die in counts:
-        if counts[die]==3:
-            threeofkind+=1
-    if threeofkind==2:
+    for count in counts.values():
+        if counts>=3:
+            threeofkind+=count//3
+    if threeofkind>=2:
         return sum(dice)
     return 0
 def tower(dice): #checks for tower by utilizing a dictionary to keep count of how many times a dice value appears.Then checks if the frequencies match the tower combination and returns sum
@@ -135,11 +135,11 @@ def tower(dice): #checks for tower by utilizing a dictionary to keep count of ho
     countfour=0
     counttwo=0
     for die in counts:
-        if counts[die]==4:
+        if counts[die]>=4:
             countfour+=1
         elif counts[die]==2:
             counttwo+=1
-    if countfour==1 and counttwo==1:
+    if countfour>=1 and counttwo>=1:
         return sum(dice)
     return 0
         
@@ -201,4 +201,4 @@ def uploadhighscore2(highscorename, highscore): #sorts the highscores in the fil
                 file.write(f'{name}:{score}\n')
     except FileNotFoundError:
         with open('highscore.txt','w') as file:
-            file.write(f'{name}:{score}\n')
+            file.write(f'{highscorename}:{highscore}\n')
