@@ -97,9 +97,16 @@ def menu(): #this function is used as a main and partly a menu function that tak
                         posibilities(cast0)
 
                         if throws < 2:
-                            reroll_prompt = input("Would you like to reroll again? (y/n): ")
-                            if reroll_prompt.lower() == 'n':
-                                break  #break to end loop to go to category choice if 'n' is typed 
+                            # error handling for reroll input
+                            while True:
+                                reroll_prompt = input("Would you like to reroll again? (y/n): ")
+                                if reroll_prompt.lower() == 'y':
+                                    break # valid input to reroll again
+                                elif reroll_prompt.lower() == 'n':
+                                    throws = 2
+                                    break
+                                else:
+                                    print("Invalid input. Please enter 'y' for yes or 'n' for no")
 
                     print('\nProceeding to category choice...')
                     print(f'\n|{player.capitalize()}|') #prints players name then displays the board using the display function after categories have been filled and prints players current total score
