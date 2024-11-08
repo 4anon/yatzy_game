@@ -68,12 +68,15 @@ def posibilities(cast): #posibility dictionary for initialization
      
     two=0
     three=0
-    for count in counts.values():
-        if count>=2:
-            two=1
-        elif count>=3:
-            three=1
-    if two>=1 and three>=1:
+    for count in counts:
+        if counts[count]>=3:
+            if count>three:
+                three=count
+    for count in counts:
+        if counts[num]>=2 and num!=three:
+            if count>two:
+                two=count
+    if two>=0 and three>=0:
         posibility['full house']=sum(cast)
     posibility['chance']=sum(cast) #checks for chance 
     if len(counts) == 1: #checks for yatzy 
@@ -88,7 +91,7 @@ def posibilities(cast): #posibility dictionary for initialization
     for count in counts.values(): #checks for tower
         if count >= 4:
             fourkind = 1
-        if count >= 2:
+        if count == 2:
             pair = 1
     if fourkind>=1 and pair>=1:
         posibility['tower'] = sum(cast)
