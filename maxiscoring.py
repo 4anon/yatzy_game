@@ -102,12 +102,18 @@ def fullhouse(dice): #checks for full house by utilizing a dictionary to keep co
             counts[die]=1
     pair=0
     triple=0
-    for die in counts:
-        if counts[die]>=3:
-            triple=1
-        elif counts[die]>=2:
-            pair=1
-    if triple>=1 and pair>=1:
+    fullhousesum=0
+    for die in sorted(counts,reverse=True):
+        if counts[die]>=3 and triple==0:
+            triple=die
+            fullhousesum+=die*3
+            counts[die]-=3
+    for die in sorted(counts,reverse=True):
+        if counts[die]>=2 and pair==0:
+            pair=die
+            fullhousesum+=die*2
+    
+    if triple and pair:
         return sum(dice)
     return 0   
     
