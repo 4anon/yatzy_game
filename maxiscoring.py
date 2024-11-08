@@ -118,7 +118,7 @@ def fullhouse(dice): #checks for full house by utilizing a dictionary to keep co
     return 0   
     
 def villa(dice): #checks for villa by utilizing a dictionary to keep count of how many times a dice value appears.Then checks if the frequencies match the villa combination and returns sum
-    counts={}
+    counts = {}
     for die in dice:
         if die in counts:
             counts[die]+=1
@@ -126,11 +126,12 @@ def villa(dice): #checks for villa by utilizing a dictionary to keep count of ho
             counts[die]=1
     threeofkind=0
     for count in counts.values():
-        if counts>=3:
-            threeofkind+=count//3
-    if threeofkind>=2:
+        if count >= 3:
+            threeofkind += count // 3
+    if threeofkind >= 2:
         return sum(dice)
     return 0
+
 def tower(dice): #checks for tower by utilizing a dictionary to keep count of how many times a dice value appears.Then checks if the frequencies match the tower combination and returns sum
     counts={}
     for die in dice:
@@ -173,7 +174,7 @@ def highscore(totalscore, playername): #takes as an iput the players total score
 def highscoreinstall(): #error handling for valueerror and file errors, reads the file and returns the highscore name in the file as well as the highscore converted into an integer 
     try: 
         with open('highscore.txt','r') as file:
-            score = file.read().strip().split(',')
+            score = file.read().strip().split(':')
             if len(score) == 2:
                 highscorename = score[0]
                 highscore = int(score[1])

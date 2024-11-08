@@ -9,7 +9,7 @@ def menu(): #this function is used as a main and partly a menu function that tak
     playerscore = {}
     playernames = []
     filledcategories_all = {}
-    bonusawarded={}
+    bonusawarded = {}
 
     #error handling input for player count while asking for number of players as input
     while True:
@@ -65,10 +65,10 @@ def menu(): #this function is used as a main and partly a menu function that tak
                     if not bonusawarded[player]:
                         bonus = bonuscheck(playerscore[player])
                         totalscore[player] += bonus
-                        print(f'\n Your current bonus for having >73 uppersection points:{bonus}')
+                        print(f'\nYour current bonus for having >73 uppersection points:{bonus}')
                         bonusawarded[player]=True
                     else:
-                        print(f'\n Your current bonus for having >73 uppersection points:{bonus}')
+                        print(f'\nYour current bonus for having >73 uppersection points:{bonus}')
                     
                     while throws < 2: #checks for two rerolls by the rules of the game
                         print(f'Current roll: {cast0}')
@@ -115,10 +115,10 @@ def menu(): #this function is used as a main and partly a menu function that tak
                     if not bonusawarded[player]:
                         bonus = bonuscheck(playerscore[player])
                         totalscore[player] += bonus
-                        print(f'\n Your current bonus for having >73 uppersection points:{bonus}')
+                        print(f'\nYour current bonus for having >73 uppersection points:{bonus}')
                         bonusawarded[player]=True
                     else:
-                        print(f'\n Your current bonus for having >73 uppersection points:{bonus}')
+                        print(f'\nYour current bonus for having >73 uppersection points:{bonus}')
                     category_chosen = False #initializes category as false and then initializes it as true after it was chosen and scored succesfully 
                     
                     while not category_chosen:  
@@ -141,10 +141,10 @@ def menu(): #this function is used as a main and partly a menu function that tak
                     if not bonusawarded[player]:
                         bonus = bonuscheck(playerscore[player])
                         totalscore[player] += bonus
-                        print(f'/n Your current bonus for having >73 uppersection points:{bonus}')
-                        bonusawarded[player]=True
+                        print(f'\nYour current bonus for having >73 uppersection points:{bonus}')
+                        bonusawarded[player] = True
                     else:
-                        print(f'/n Your current bonus for having >73 uppersection points:{bonus}')
+                        print(f'\nYour current bonus for having >73 uppersection points:{bonus}')
 
     except Exception as e:
         print(f"An unexpected error occurred: {e}. Please try again.")
