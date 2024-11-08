@@ -1,6 +1,7 @@
 import random
 from maxiscoring import *
-
+#imports all the scoring functions and the random module 
+#takes as in input filled or unfilled categories from main and returns them in a board.It checks if they are filled and and returns the scored filled in if they are.
 def displayscoreboard(scoredcategories):
     categories=[ "ones", "twos", "threes", "fours", "fives", "sixes",
         "one pair", "two pairs", "three of a kind", "four of a kind",
@@ -15,7 +16,8 @@ def displayscoreboard(scoredcategories):
     lines.append('')
     output='\n'.join(lines)
     return output
-
+#takes as an input player choice and  the dice values and replaces spaces for better matching
+#calls a specific scoring function based on the matching of the choices with the categories  inputs a number to the scorenumber function for calculating ones to sixes depending on the chosen category
 def scorecalculation(choice, cast):
     choice = choice.replace(" ", "")  # Remove spaces for consistent matching
 
@@ -58,8 +60,8 @@ def scorecalculation(choice, cast):
     elif choice == 'yatzy':
         return yatzycheck(cast)
     else:
-        return None  # Return None for invalid category
-
+        return None  #returns none if the category isnt matched 
+#takes as an input filled and unfilled categories initializes a list of valid categories 
 def categorychoice(filledcategories, cast):
     categories = [
         "ones", "twos", "threes", "fours", "fives", "sixes",
@@ -67,17 +69,17 @@ def categorychoice(filledcategories, cast):
         "five of a kind", "small straight", "large straight", "full straight",
         "villa", "tower", "full house", "chance", "yatzy"
     ]
-    
+    #checks if the category is valid if not it prompts the player to try again
     category = input('Enter a category: ').strip().lower()
-
+     
     if category in filledcategories:
         return 'This category is filled, choose a different one', filledcategories  # Return a tuple
     if category not in categories:
         return 'Invalid category, try again', filledcategories  # Return a tuple
-
+    #includes error handling for proper input 
     try:
         score = scorecalculation(category, cast)
-        filledcategories[category] = int(score)  # Update filled categories with the score
-        return f'You scored {score} points in the {category}', filledcategories  # Return success message and updated categories
+        filledcategories[category] = int(score) #converts into an integer 
+        return f'You scored {score} points in the {category}', filledcategories  #returns newly scored categories and the scored message if they were scored and chosen succesfully 
     except (ValueError, TypeError):
-        return 'Type error or value error, try again', filledcategories  # Return a tuple
+        return 'Type error or value error, try again', filledcategories #returns the unchanged categories and an error message
