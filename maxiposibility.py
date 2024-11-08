@@ -1,14 +1,13 @@
-from collections import Counter
-import random
-
-def posibilities(cast):
-    #posibility dict for initialization
+from collections import Counter #imports counter function from collections 
+import random #imports random module 
+#the function shows which categories havve potential scoring values for a given dice value 
+def posibilities(cast): #posibility dictionary for initialization
     posibility = {
         "ones": 0, "twos": 0, "threes": 0, "fours": 0, "fives": 0, "sixes": 0,
         "one pair": 0, "two pairs": 0, "three of a kind": 0, "four of a kind": 0, 'five of a kind':0, 'villa':0 , 'tower':0, "small straight": 0, "large straight": 0,'full straight':0, "full house": 0, "chance":0, "yatzy": 0
     }
 
-    # Count occurrences of each number
+    #uses counter to count  occurrences of each number
     counts = Counter(cast)
 
     # Assign values to possibilities based on counts
@@ -26,7 +25,7 @@ def posibilities(cast):
         elif number == 6:
             posibility["sixes"] += count * 6
     
-    #identifies highest pair and assigns it to one pair
+    #cchecks for one pair 
     highest_pair = 0
     for num, count in counts.items():
         if count >= 2:
@@ -34,90 +33,70 @@ def posibilities(cast):
             if pair_value > highest_pair:
                 highest_pair = pair_value
 
-    posibility["one pair"] = 
-
-    #appends the values of the two largest pairs
+    posibility["one pair"] = highest_pair
+    #checks for two pairs
     two_pair_values = []
     for num, count in counts.items():
         if count >= 2:
             two_pair_values.append(num)
+
     if len(two_pair_values) >= 2:
         posibility["two pairs"] = (two_pair_values[0] + two_pair_values[1]) * 2
         
-    # Check for the highest "three of a kind"
-    highest_three_of_a_kind = 0
+    # Check for three of a kind
     for num, count in counts.items():
         if count >= 3:
-            three_of_a_kind_value = num * 3
-            if three_of_a_kind_value > highest_three_of_a_kind:
-                highest_three_of_a_kind = three_of_a_kind_value
-    posibility["three of a kind"] = highest_three_of_a_kind
+            posibility["three of a kind"] = num * 3
+            break  # Stop after finding the first three of a kind
             
-            
-    # four of a kind  
+    #checks for four of a kind 
     for num, count in counts.items():
         if count >= 4:
             posibility["four of a kind"] = num * 4
             break  # Stop after finding the first three of a kind
-
-    for num,count in counts.items(): #5 of a kind
-        if count >= 5:
-            posibility['five of a kind'] = num * 5
+    for num,count in counts.items(): #checks for five of a kind 
+        if count >=5:
+            posibility['five of a kind']=num*5
             break
+    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts): #checks for small straight 
+        posibility['small straight']=15
 
-    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts): #small straight
-        posibility['small straight'] = 15
-
-    if (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts): # large straight
-        posibility['large straight'] = 20
-
-    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts): #full straight
-        posibility['full straight'] = 21
-
-    #full house
-    if len(counts) == 2:
-        two = 0
-        three = 0
-        for count in counts.values():
-            if count == 2:
-                two = 1
-            elif count == 3:
-                three = 1
-        if two + three == 2:
-            posibility['full house'] = sum(cast)
-    #chance        
-    posibility['chance'] = sum(cast)  
-
-    #if all dice in counts are the same
-    if len(counts) == 1:
-        posibility['yatzy'] = 100
-
-    threekind = [] # Initialize an empty list to store numbers that appear three or more times
-    for num,count in counts.items(): #threekind
-        if count >= 3: #Check if this number appears three or more times
-            threekind.append(num)
-
-    # Check if there are at least two different numbers that each appear three or more times        
-    if len(threekind)>=2: #villa 
+    if (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts): #checks for large straight 
+        posibility['large straight']=20
+    if (1 in counts) and (2 in counts) and (3 in counts) and (4 in counts) and (5 in counts) and (6 in counts): #checks for full straight 
+        posibility['full straight']=21
+     
+    two=0
+    three=0
+    for count in counts.values():
+        if count>=2:
+            two=1
+        elif count>=3:
+            three=1
+    if two>=1 and three>=1:
+        posibility['full house']=sum(cast)
+    posibility['chance']=sum(cast) #checks for chance 
+    if len(counts) == 1: #checks for yatzy 
+        posibility['yatzy']=100
+    threekind=[] #checks for villa 
+    for num,count in counts.items():
+        threekind.extend([num]*(count//3))
+    if len(threekind)>=2:
         posibility['villa']=sum(cast)
-        
     fourkind = 0
     pair = 0
-    # tower
-    for count in counts.values():
+    for count in counts.values(): #checks for tower
         if count >= 4:
             fourkind = 1
         if count >= 2:
             pair = 1
-    if fourkind + pair == 2:
+    if fourkind>=1 and pair>=1:
         posibility['tower'] = sum(cast)
-
     for key,value in posibility.items():
         if value != 0:
             print(f'{key}:your value:{value}')
-            
-    #returns the dict with the posibilities
-    return posibility
+    #prints the potential values directly to be changed 
+    return posibility #returns the possibility dictionary 
     
 
 
