@@ -107,7 +107,7 @@ def fullhouse(dice): #checks for full house by utilizing a dictionary to keep co
             triple=1
         elif counts[die]>=2:
             pair=1
-    if triple and pair:
+    if triple>=1 and pair>=1:
         return sum(dice)
     return 0   
     
