@@ -112,7 +112,7 @@ def posibilities(cast): #posibility dictionary for initialization
         if value != 0:
             print(f'{key}:your value:{value}')
 
-    #prints the potential values directly to be changed 
+    #prints the potential values directly 
     return posibility #returns the possibility dictionary 
     
 
